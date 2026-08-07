@@ -1,16 +1,29 @@
-# React + Vite
+# MarTech Data Flow Blueprint
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+An interactive walkthrough of how leads and prospect data move through a B2B MarTech stack, built with React + Vite.
 
-Currently, two official plugins are available:
+Each flow covers one way a visitor can enter the pipeline (paid ads, off-platform lead gen, third-party vendors, event registration) and lets you flip between two perspectives:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Visitor View** — what the visitor actually sees and clicks
+- **Systems View** — what's happening under the hood across Marketo, Salesforce, and the rest of the stack, with clickable terms that open plain-English definitions
 
-## React Compiler
+It also includes a standalone architecture diagram ("The Core Data Flow Engine") and a searchable Glossary of every technical term used throughout.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech stack
 
-## Expanding the Oxlint configuration
+Marketo Engage and Salesforce CRM as the primary core stack, alongside tools like Google Tag Manager, LeanData, Zapier, and custom webhooks.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Local development
+
+```bash
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+```
+
+Outputs a static site to `dist/`, ready to deploy (configured for Netlify via `netlify.toml`).

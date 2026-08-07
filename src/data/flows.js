@@ -524,8 +524,8 @@ export const flows = [
               },
             ],
             note: {
-              label: 'Pro-Tip:',
-              text: 'A common timing gap: Salesforce can’t natively push an “owner assigned” signal back to Marketo in real time, so Marketo has to wait for its next poll to notice the change. Many teams work around this by flagging alert-worthy leads before the sync, or triggering the SDR alert directly from the routing tool (e.g., LeanData) the instant it assigns an owner.',
+              label: 'Pro-Tip (The Sync Timing Gap):',
+              text: 'Standard Salesforce lead assignment updates don’t push back to Marketo in real time. Marketo must wait for its next sync cycle (5–10 min) to detect the owner change. To protect tight SLA response times, best practice is to trigger SDR alerts directly from your routing engine (e.g., LeanData or Salesforce Flow) the instant assignment occurs.',
             },
             cta: 'Continue to handoff →',
           },

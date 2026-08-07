@@ -35,7 +35,12 @@ export default function App() {
 
   return (
     <GlossaryProvider onNavigateToGlossary={() => handleSelectFlow('glossary')}>
-      <div className="app">
+      <div className="app-shell">
+        <header className="app-banner">
+          <p className="app-banner-title">MarTech Data Flow Blueprint</p>
+          <p className="app-banner-subtitle">An interactive guide to enterprise lead ingestion &amp; system routing</p>
+        </header>
+        <div className="app">
         <Sidebar activeFlowId={activeFlowId} onSelect={handleSelectFlow} />
       <main className="main">
         {flow.kind !== 'about' && flow.kind !== 'glossary' && (
@@ -151,6 +156,7 @@ export default function App() {
           />
         )}
         </main>
+        </div>
       </div>
       <GlossaryDrawer />
     </GlossaryProvider>

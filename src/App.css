@@ -1,6 +1,37 @@
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+.app-banner {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  flex-shrink: 0;
+  padding: 16px 32px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.app-banner-title {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text);
+}
+
+.app-banner-subtitle {
+  margin: 3px 0 0;
+  font-size: 12px;
+  color: var(--text-faint);
+}
+
 .app {
   display: flex;
-  min-height: 100svh;
+  flex: 1;
+  min-height: 0;
 }
 
 /* Sidebar */
@@ -740,6 +771,8 @@
   color: var(--text-muted);
   line-height: 1.5;
   margin: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 /* Channel bar (within a walkthrough) */
@@ -796,7 +829,7 @@
 .picker-diagram {
   position: relative;
   width: 100%;
-  max-width: 900px;
+  max-width: 1220px;
   margin: 0 0 28px;
   overflow-x: auto;
   overflow-y: visible;
@@ -809,7 +842,7 @@
 .engine-diagram {
   display: block;
   width: 100%;
-  min-width: 620px;
+  min-width: 760px;
   height: auto;
 }
 
@@ -880,6 +913,16 @@
   stroke: var(--text);
 }
 
+.engine-diagram-section.is-active .engine-diagram-label {
+  fill: var(--text);
+  text-decoration-style: solid;
+}
+
+.engine-diagram-section.is-active .engine-diagram-box {
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+
 .engine-diagram-hint {
   margin: 12px 0 0;
   font-size: 12px;
@@ -893,72 +936,82 @@
   font-style: normal;
 }
 
-.engine-diagram-popup {
-  position: absolute;
-  top: calc(100% + 16px);
-  max-width: 340px;
-  padding: 12px 16px;
-  font-size: 12px;
-  line-height: 1.6;
-  color: var(--text-muted);
+.engine-diagram-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 100;
+  animation: engine-modal-fade-in 0.15s ease-out;
+}
+
+.engine-diagram-modal {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  padding: 28px 28px 24px;
   background: var(--bg);
   border: 1px solid var(--border-strong);
-  border-radius: 10px;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+  border-radius: 12px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
   text-align: left;
-  z-index: 30;
-  pointer-events: none;
-  animation: engine-popup-in 0.16s ease-out;
+  animation: engine-modal-in 0.18s ease-out;
 }
 
-.engine-diagram-popup::before {
-  content: '';
-  position: absolute;
-  top: -7px;
-  width: 13px;
-  height: 13px;
-  background: var(--bg);
-  border-left: 1px solid var(--border-strong);
-  border-top: 1px solid var(--border-strong);
-  transform: rotate(45deg);
-}
-
-.engine-diagram-popup strong {
+.engine-diagram-modal-title {
+  margin: 0 0 12px;
+  font-family: var(--serif);
+  font-size: 20px;
   color: var(--text);
 }
 
-.engine-diagram-popup-inputs {
-  left: 1%;
+.engine-diagram-modal p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
-.engine-diagram-popup-inputs::before {
-  left: 24px;
+.engine-diagram-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: none;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--text-faint);
+  cursor: pointer;
 }
 
-.engine-diagram-popup-core {
-  left: 38%;
+.engine-diagram-modal-close:hover {
+  color: var(--text);
 }
 
-.engine-diagram-popup-core::before {
-  left: 40px;
-}
-
-.engine-diagram-popup-outputs {
-  right: 1%;
-}
-
-.engine-diagram-popup-outputs::before {
-  right: 24px;
-}
-
-@keyframes engine-popup-in {
+@keyframes engine-modal-fade-in {
   from {
     opacity: 0;
-    transform: translateY(-4px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+  }
+}
+
+@keyframes engine-modal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
   }
 }
 
@@ -1142,7 +1195,7 @@
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease;
-  z-index: 40;
+  z-index: 150;
 }
 
 .glossary-backdrop.is-open {
@@ -1166,7 +1219,7 @@
   opacity: 0;
   pointer-events: none;
   transition: transform 0.2s ease, opacity 0.2s ease;
-  z-index: 50;
+  z-index: 160;
   display: flex;
   flex-direction: column;
   padding: 28px 24px;
@@ -1246,6 +1299,8 @@
   line-height: 1.6;
   color: var(--text-muted);
   margin: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .glossary-drawer-section p + p {
@@ -1320,6 +1375,7 @@
 
 .glossary-term-card {
   text-align: left;
+  min-width: 0;
 }
 
 /* Organic search-result mockup */

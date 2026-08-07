@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import GlossaryText from './GlossaryText';
 
 const INPUTS = ['Web Traffic', 'Social', 'Syndication', 'Events'];
@@ -19,7 +19,20 @@ const TOOLTIPS = {
 };
 
 export default function BackendEngineDiagram() {
-  const [hovered, setHovered] = useState(null);
+  const [active, setActive] = useState(null);
+
+  function toggle(section) {
+    setActive((current) => (current === section ? null : section));
+  }
+
+  useEffect(() => {
+    if (!active) return undefined;
+    function handleKey(e) {
+      if (e.key === 'Escape') setActive(null);
+    }
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [active]);
 
   return (
     <div className="engine-diagram-wrap">
@@ -31,9 +44,8 @@ export default function BackendEngineDiagram() {
         </defs>
 
         <g
-          className="engine-diagram-section"
-          onMouseEnter={() => setHovered('Inputs')}
-          onMouseLeave={() => setHovered(null)}
+          className={`engine-diagram-section${active === 'Inputs' ? ' is-active' : ''}`}
+          onClick={() => toggle('Inputs')}
         >
           <text x="90" y="30" textAnchor="middle" className="engine-diagram-label">Inputs</text>
           {INPUTS.map((label, i) => {
@@ -52,9 +64,8 @@ export default function BackendEngineDiagram() {
         <path d="M690 195 L730 195" className="engine-diagram-line" markerEnd="url(#engine-arrow)" />
 
         <g
-          className="engine-diagram-section"
-          onMouseEnter={() => setHovered('Core')}
-          onMouseLeave={() => setHovered(null)}
+          className={`engine-diagram-section${active === 'Core' ? ' is-active' : ''}`}
+          onClick={() => toggle('Core')}
         >
           <text x="580" y="118" textAnchor="middle" className="engine-diagram-label">Core</text>
           <rect x="470" y="145" width="220" height="100" rx="8" className="engine-diagram-box engine-diagram-box-core" />
@@ -65,9 +76,8 @@ export default function BackendEngineDiagram() {
         </g>
 
         <g
-          className="engine-diagram-section"
-          onMouseEnter={() => setHovered('Outputs')}
-          onMouseLeave={() => setHovered(null)}
+          className={`engine-diagram-section${active === 'Outputs' ? ' is-active' : ''}`}
+          onClick={() => toggle('Outputs')}
         >
           <text x="975" y="148" textAnchor="middle" className="engine-diagram-label">Outputs</text>
           {OUTPUT_X.map((x, i) => (
@@ -83,11 +93,27 @@ export default function BackendEngineDiagram() {
         <path d="M1050 195 L1070 195" className="engine-diagram-line" markerEnd="url(#engine-arrow)" />
       </svg>
 
-      <p className="engine-diagram-hint">Hover over <strong>Inputs</strong>, <strong>Core</strong>, or <strong>Outputs</strong> above for details.</p>
+      <p className="engine-diagram-hint">Click <strong>Inputs</strong>, <strong>Core</strong>, or <strong>Outputs</strong> above for details.</p>
 
-      {hovered && (
-        <div className={`engine-diagram-popup engine-diagram-popup-${hovered.toLowerCase()}`} role="tooltip">
-          <strong>{hovered}:</strong> <GlossaryText text={TOOLTIPS[hovered]} />
+      {active && (
+        <div className="engine-diagram-modal-backdrop" onClick={() => setActive(null)}>
+          <div
+            className="engine-diagram-modal"
+            role="dialog"
+            aria-label={`${active} details`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="engine-diagram-modal-close"
+              onClick={() => setActive(null)}
+              aria-label="Close"
+            >
+              ×
+            </button>
+            <h3 className="engine-diagram-modal-title">{active}</h3>
+            <p><GlossaryText text={TOOLTIPS[active]} /></p>
+          </div>
         </div>
       )}
     </div>
