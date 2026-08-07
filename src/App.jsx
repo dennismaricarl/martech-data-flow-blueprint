@@ -38,7 +38,6 @@ export default function App() {
       <div className="app-shell">
         <header className="app-banner">
           <p className="app-banner-title">MarTech Data Flow Blueprint</p>
-          <p className="app-banner-subtitle">An interactive guide to enterprise lead ingestion &amp; system routing</p>
         </header>
         <div className="app">
         <Sidebar activeFlowId={activeFlowId} onSelect={handleSelectFlow} />
