@@ -167,6 +167,16 @@ export const glossary = [
     match: ['Google Tag Manager', 'GTM'],
   },
   {
+    id: 'gtm-trigger',
+    label: 'GTM Trigger',
+    category: 'Client-Side Mechanics',
+    definition:
+      'A rule configured inside Google Tag Manager that listens for a specific browser event, like a custom Data Layer event or a click, and fires a tag when it matches. This is a GTM-native concept, separate from a Marketo Smart Campaign trigger.',
+    mopsContext:
+      'The GTM Trigger here watches the Data Layer for the "form_submit" event pushed by Marketo’s script, then fires the Google Ads Conversion Tag. It’s configured entirely in GTM and has nothing to do with the Marketo trigger that already fired to create the Lead.',
+    match: ['GTM Trigger', 'GTM trigger'],
+  },
+  {
     id: 'google-ads',
     label: 'Google Ads',
     category: 'Client-Side Mechanics',

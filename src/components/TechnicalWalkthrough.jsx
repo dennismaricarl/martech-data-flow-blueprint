@@ -188,7 +188,7 @@ function reactionBranches(channel) {
         { k: 'Destination', v: 'Google Ads' },
         { k: 'Status', v: '200, gclid decrypted → matched to Campaign, Keyword, Ad' },
       ],
-      caption: 'In GTM, a Trigger watches the Data Layer for the form submit event. Once detected, it fires the Google Ads Conversion Tag, which grabs the saved gclid cookie and sends it to Google Ads, matching the lead directly to the exact campaign, keyword, and ad.',
+      caption: 'The GTM Trigger watches the Data Layer for the form submit event. Once detected, it fires the Google Ads Conversion Tag, which grabs the saved gclid cookie and sends it to Google Ads, matching the lead directly to the exact campaign, keyword, and ad.',
     },
   ];
 }
