@@ -360,7 +360,7 @@ export const glossary = [
     definition:
       'A single action inside a Smart Campaign’s Flow, executed in order for every record that qualifies. Common flow steps include changing a data value, sending an email, waiting before continuing, or branching with a Choice step.',
     mopsContext:
-      'MOPs teams often add a short Wait Step before a Send Email step, to guarantee an API response (like a Zoom join link) has time to populate before the email actually renders.',
+      'Flow steps run in strict order for each qualified record, chaining actions like Change Data Value, Send Email, Wait, and Choice steps into a single automated sequence.',
     match: ['Flow’s steps', 'Send Email flow step', 'Send Email step', 'Choice step', 'Wait Step', 'ELSE branch', 'flow step'],
   },
   {

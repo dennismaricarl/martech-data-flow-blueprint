@@ -413,8 +413,8 @@ export const flows = [
               },
             ],
             note: {
-              label: 'Pro-Tip:',
-              text: 'Because the API round-trip to Zoom takes a fraction of a second, MOps best practice adds a brief 1–2 minute Wait Step before the Send Email action, guaranteeing the {{member.webinar url}} token is populated before the confirmation email renders, so no one ever receives a blank link.',
+              label: 'Note:',
+              text: 'This walkthrough assumes a native LaunchPoint connection to the webinar platform, not a custom-built webhook integration.',
             },
             cta: 'Continue to the live event →',
           },
